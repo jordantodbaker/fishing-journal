@@ -1,5 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { SignInButton } from "@clerk/tanstack-react-start";
+import { Link, createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getOptionalUserId } from "~/server/auth";
 
@@ -32,9 +31,13 @@ function LandingPage() {
         season unfold in charts.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <SignInButton mode="modal">
-          <button className="btn-primary">Sign in to get started</button>
-        </SignInButton>
+        <Link
+          to="/sign-in/$"
+          params={{ _splat: "" }}
+          className="btn-primary"
+        >
+          Sign in to get started
+        </Link>
       </div>
       <ul className="mt-12 grid w-full grid-cols-1 gap-3 text-left sm:grid-cols-3">
         {[
