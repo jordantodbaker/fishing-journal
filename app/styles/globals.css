@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply h-full bg-moss-50 text-moss-900 antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 20% -10%, rgba(71, 105, 56, 0.10), transparent 40%),
+      radial-gradient(circle at 110% 10%, rgba(53, 120, 132, 0.08), transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-moss-100 bg-white p-5 shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-moss-500 focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-moss-700 text-moss-50 hover:bg-moss-600 disabled:bg-moss-300 disabled:text-moss-50;
+  }
+  .btn-secondary {
+    @apply btn border border-moss-200 bg-white text-moss-800 hover:bg-moss-50;
+  }
+  .btn-danger {
+    @apply btn bg-red-700 text-red-50 hover:bg-red-600;
+  }
+  .input {
+    @apply block w-full rounded-xl border border-moss-200 bg-white px-3 py-2 text-sm text-moss-900 placeholder:text-moss-400 focus:border-moss-500 focus:outline-none focus:ring-2 focus:ring-moss-500/30;
+  }
+  .label {
+    @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-moss-700;
+  }
+}

@@ -1,0 +1,38 @@
+// Prisma schema for the Pacific Northwest fishing journal.
+// All Catch records are scoped per-user via Clerk's userId.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+model Catch {
+  id         String   @id @default(cuid())
+  userId     String
+  species    String
+  weight     Float
+  length     Float
+  location   String
+  method     String
+  dateCaught DateTime
+  notes      String?
+  photoUrl   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId, dateCaught(sort: Desc)])
+  @@index([userId, species])
+  @@index([userId, location])
+}
+
+model Species {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  category  String
+  createdAt DateTime @default(now())
+}
