@@ -72,7 +72,7 @@ function AppLayout() {
           </nav>
           <UserButton />
         </div>
-        <nav className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 pb-3 sm:hidden">
+        <nav className="mx-auto flex max-w-6xl gap-1.5 overflow-x-auto px-4 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden">
           {NAV.map((item) => {
             const active =
               pathname === item.to || pathname.startsWith(`${item.to}/`);
@@ -81,7 +81,7 @@ function AppLayout() {
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium",
+                  "whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium",
                   active
                     ? "bg-moss-700 text-moss-50"
                     : "border border-moss-200 bg-white text-moss-700",
@@ -93,10 +93,10 @@ function AppLayout() {
           })}
         </nav>
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-5 sm:px-6 sm:py-8">
         <Outlet />
       </main>
-      <footer className="mx-auto w-full max-w-6xl px-4 py-6 text-xs text-moss-600 sm:px-6">
+      <footer className="mx-auto w-full max-w-6xl px-4 py-5 text-xs text-moss-600 sm:px-6 sm:py-6">
         Tight lines. Built for the PNW.
       </footer>
     </div>

@@ -28,13 +28,15 @@ function DashboardContent() {
   const { data } = useSuspenseQuery(dashboardQuery);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
+    <div className="space-y-5 sm:space-y-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
         <div>
-          <h1 className="font-display text-3xl text-moss-900">Dashboard</h1>
+          <h1 className="font-display text-2xl text-moss-900 sm:text-3xl">
+            Dashboard
+          </h1>
           <p className="text-sm text-moss-600">A quick read on your season.</p>
         </div>
-        <Link to="/log" className="btn-primary">
+        <Link to="/log" className="btn-primary w-full sm:w-auto">
           + Log a catch
         </Link>
       </div>
@@ -64,11 +66,11 @@ function DashboardContent() {
       </div>
 
       <section className="card">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-display text-xl">Recent catches</h2>
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <h2 className="font-display text-lg sm:text-xl">Recent catches</h2>
           <Link
             to="/catches"
-            className="text-sm font-medium text-river-700 hover:underline"
+            className="whitespace-nowrap text-sm font-medium text-river-700 hover:underline"
           >
             View all →
           </Link>
@@ -84,13 +86,15 @@ function DashboardContent() {
                   params={{ id: c.id }}
                   className="flex items-center justify-between gap-3 py-3 hover:bg-moss-50/60"
                 >
-                  <div>
-                    <p className="font-medium text-moss-900">{c.species}</p>
-                    <p className="text-xs text-moss-600">
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-medium text-moss-900">
+                      {c.species}
+                    </p>
+                    <p className="truncate text-xs text-moss-600">
                       {formatDate(c.dateCaught)} • {c.location} • {c.method}
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div className="shrink-0 text-right">
                     <p className="font-medium text-moss-800">
                       {formatWeight(c.weight)}
                     </p>

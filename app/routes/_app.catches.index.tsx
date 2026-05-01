@@ -82,20 +82,25 @@ function CatchesContent() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
+    <div className="space-y-5 sm:space-y-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
         <div>
-          <h1 className="font-display text-3xl text-moss-900">Catch history</h1>
+          <h1 className="font-display text-2xl text-moss-900 sm:text-3xl">
+            Catch history
+          </h1>
           <p className="text-sm text-moss-600">
             {data.total} catch{data.total === 1 ? "" : "es"} on file.
           </p>
         </div>
-        <Link to="/log" className="btn-primary">
+        <Link to="/log" className="btn-primary w-full sm:w-auto">
           + Log a catch
         </Link>
       </div>
 
-      <form onSubmit={applyFilters} className="card grid gap-3 sm:grid-cols-4">
+      <form
+        onSubmit={applyFilters}
+        className="card grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
+      >
         <div>
           <label className="label" htmlFor="f-species">
             Species
@@ -148,15 +153,15 @@ function CatchesContent() {
             onChange={(e) => setDraft((d) => ({ ...d, to: e.target.value }))}
           />
         </div>
-        <div className="sm:col-span-4 flex justify-end gap-2">
+        <div className="flex flex-col-reverse gap-2 sm:col-span-2 sm:flex-row sm:justify-end lg:col-span-4">
           <button
             type="button"
-            className="btn-secondary"
+            className="btn-secondary w-full sm:w-auto"
             onClick={clearFilters}
           >
             Clear
           </button>
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="btn-primary w-full sm:w-auto">
             Apply filters
           </button>
         </div>
@@ -174,21 +179,52 @@ function CatchesContent() {
                 <Link
                   to="/catches/$id"
                   params={{ id: c.id }}
-                  className="grid grid-cols-2 gap-2 px-4 py-3 hover:bg-moss-50/60 sm:grid-cols-5 sm:items-center"
+                  className="block hover:bg-moss-50/60"
                 >
-                  <div className="sm:col-span-2">
-                    <p className="font-medium text-moss-900">{c.species}</p>
-                    <p className="text-xs text-moss-600">
-                      {formatDate(c.dateCaught)}
-                    </p>
+                  {/* Mobile layout */}
+                  <div className="flex items-start justify-between gap-3 px-4 py-3 sm:hidden">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-medium text-moss-900">
+                        {c.species}
+                      </p>
+                      <p className="truncate text-xs text-moss-600">
+                        {formatDate(c.dateCaught)} • {c.location}
+                      </p>
+                      <p className="truncate text-xs text-moss-500">
+                        {c.method}
+                      </p>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <p className="font-medium text-moss-800">
+                        {formatWeight(c.weight)}
+                      </p>
+                      <p className="text-xs text-moss-600">
+                        {formatLength(c.length)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="text-sm text-moss-700">{c.location}</div>
-                  <div className="text-sm text-moss-700">{c.method}</div>
-                  <div className="text-right text-sm text-moss-800">
-                    {formatWeight(c.weight)}
-                    <span className="ml-2 text-moss-500">
-                      {formatLength(c.length)}
-                    </span>
+                  {/* Desktop layout */}
+                  <div className="hidden grid-cols-5 items-center gap-2 px-4 py-3 sm:grid">
+                    <div className="col-span-2 min-w-0">
+                      <p className="truncate font-medium text-moss-900">
+                        {c.species}
+                      </p>
+                      <p className="text-xs text-moss-600">
+                        {formatDate(c.dateCaught)}
+                      </p>
+                    </div>
+                    <div className="truncate text-sm text-moss-700">
+                      {c.location}
+                    </div>
+                    <div className="truncate text-sm text-moss-700">
+                      {c.method}
+                    </div>
+                    <div className="text-right text-sm text-moss-800">
+                      {formatWeight(c.weight)}
+                      <span className="ml-2 text-moss-500">
+                        {formatLength(c.length)}
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </li>
@@ -219,15 +255,16 @@ function Pagination({
 }) {
   if (pageCount <= 1) return null;
   return (
-    <div className="flex items-center justify-between text-sm text-moss-700">
+    <div className="flex items-center justify-between gap-3 text-sm text-moss-700">
       <button
         className="btn-secondary disabled:opacity-50"
         disabled={page <= 1}
         onClick={() => onChange(page - 1)}
       >
-        ← Newer
+        <span className="sm:hidden">←</span>
+        <span className="hidden sm:inline">← Newer</span>
       </button>
-      <span>
+      <span className="whitespace-nowrap">
         Page {page} of {pageCount}
       </span>
       <button
@@ -235,7 +272,8 @@ function Pagination({
         disabled={page >= pageCount}
         onClick={() => onChange(page + 1)}
       >
-        Older →
+        <span className="sm:hidden">→</span>
+        <span className="hidden sm:inline">Older →</span>
       </button>
     </div>
   );

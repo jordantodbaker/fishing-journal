@@ -21,9 +21,11 @@ function LogCatchPage() {
   });
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="mx-auto max-w-3xl space-y-5 sm:space-y-6">
       <div>
-        <h1 className="font-display text-3xl text-moss-900">Log a catch</h1>
+        <h1 className="font-display text-2xl text-moss-900 sm:text-3xl">
+          Log a catch
+        </h1>
         <p className="text-sm text-moss-600">
           Record a single fish — species, size, where and how it came in.
         </p>

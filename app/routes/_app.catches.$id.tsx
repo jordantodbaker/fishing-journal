@@ -61,9 +61,11 @@ function CatchDetailContent() {
 
   if (editing) {
     return (
-      <div className="mx-auto max-w-3xl space-y-6">
-        <div className="flex items-center justify-between">
-          <h1 className="font-display text-3xl text-moss-900">Edit catch</h1>
+      <div className="mx-auto max-w-3xl space-y-5 sm:space-y-6">
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="font-display text-2xl text-moss-900 sm:text-3xl">
+            Edit catch
+          </h1>
           <button
             className="btn-secondary"
             onClick={() => setEditing(false)}
@@ -96,8 +98,8 @@ function CatchDetailContent() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="mx-auto max-w-3xl space-y-5 sm:space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           to="/catches"
           className="text-sm font-medium text-river-700 hover:underline"
@@ -105,11 +107,14 @@ function CatchDetailContent() {
           ← All catches
         </Link>
         <div className="flex gap-2">
-          <button className="btn-secondary" onClick={() => setEditing(true)}>
+          <button
+            className="btn-secondary flex-1 sm:flex-none"
+            onClick={() => setEditing(true)}
+          >
             Edit
           </button>
           <button
-            className="btn-danger"
+            className="btn-danger flex-1 sm:flex-none"
             onClick={confirmDelete}
             disabled={remove.isPending}
           >
@@ -128,7 +133,9 @@ function CatchDetailContent() {
 
       <div className="card space-y-4">
         <div>
-          <h1 className="font-display text-3xl text-moss-900">{data.species}</h1>
+          <h1 className="font-display text-2xl text-moss-900 sm:text-3xl">
+            {data.species}
+          </h1>
           <p className="text-sm text-moss-600">
             {formatDate(data.dateCaught)} • {data.location}
           </p>

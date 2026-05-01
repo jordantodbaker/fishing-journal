@@ -251,8 +251,12 @@ export function CatchForm({ initial, submitLabel, onSubmit, pending }: Props) {
         </div>
       )}
 
-      <div className="sm:col-span-2 flex justify-end">
-        <button type="submit" className="btn-primary" disabled={pending}>
+      <div className="sm:col-span-2 flex justify-stretch sm:justify-end">
+        <button
+          type="submit"
+          className="btn-primary w-full sm:w-auto"
+          disabled={pending}
+        >
           {pending ? "Saving…" : submitLabel}
         </button>
       </div>
